@@ -18,11 +18,23 @@ namespace basket_example
 
         public void AddItem(Product product, int count)
         {
-            Items.Add(new Item()
+            if (count < 1)
+                return;
+
+            var existingProduct =
+                Items.FirstOrDefault(x => x.Product.Name == product.Name & x.Product.Price == product.Price);
+            if (existingProduct != null)
             {
-                Product = product,
-                Count = count
-            });
+                existingProduct.Count += count;
+            }
+            else
+            {
+                Items.Add(new Item()
+                {
+                    Product = product,
+                    Count = count
+                });
+            }
         }
     }
 }

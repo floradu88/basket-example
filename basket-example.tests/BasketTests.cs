@@ -41,6 +41,7 @@ namespace basket_example.tests
             basket.AddItem(new Product { Name = ProductName, Price = ProductPrice }, 1);
             basket.AddItem(new Product { Name = ProductName, Price = ProductPrice }, 1);
             Assert.Equal(ProductPrice * 2, basket.Total);
+            Assert.Single(basket.Items);
         }
 
         [Fact]
@@ -50,6 +51,16 @@ namespace basket_example.tests
 
             basket.AddItem(new Product { Name = ProductName, Price = ProductPrice }, 2);
             Assert.Equal(ProductPrice * 2, basket.Total);
+        }
+
+        [Fact]
+        public void should_not_be_able_to_add_item_with_negative_count()
+        {
+            var basket = new Basket();
+
+            basket.AddItem(new Product { Name = ProductName, Price = ProductPrice }, -1);
+            Assert.Empty(basket.Items);
+            Assert.Equal(0, basket.Total);
         }
     }
 }
