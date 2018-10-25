@@ -4,5 +4,6 @@
     {
         public Product Product { get; set; }
         public int Count { get; set; }
+        public Offer Offer { get; set; }
     }
 }

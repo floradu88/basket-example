@@ -8,7 +8,7 @@ namespace basket_example
         public List<Item> Items { get; }
         public decimal Total
         {
-            get { return Items.Sum(x => x.Product.Price * x.Count); }
+            get { return Items.Sum(x => x.Product.Price * x.Count * (x.Offer?.Percent ?? 1.0m)); }
         }
 
         public Basket()
