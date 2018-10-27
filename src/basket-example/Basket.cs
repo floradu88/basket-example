@@ -8,7 +8,17 @@ namespace basket_example
         public List<Item> Items { get; }
         public decimal Total
         {
-            get { return Items.Sum(x => x.Product.Price * x.Count * (x.Offer?.Percent ?? 1.0m)); }
+            get { return Items.Sum(x => CalculateProductPriceIncludingOffers(x)); }
+        }
+
+        private decimal CalculateProductPriceIncludingOffers(Item item)
+        {
+            if (item.Offer == null)
+                return item.Product.Price * item.Count;
+
+            var itemsFullPrice = item.Count - item.ApplyOfferCount;
+
+            return item.Product.Price * itemsFullPrice + item.ApplyOfferCount * item.Product.Price * item.Offer.Percent;
         }
 
         public Basket()

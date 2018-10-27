@@ -2,6 +2,7 @@
 {
     public class Offer
     {
+        public int Id { get; set; }
         public string ProductName { get; set; }
         public decimal Percent { get; set; }
         public int ItemsRequired { get; set; }
